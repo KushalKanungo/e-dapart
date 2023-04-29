@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -17,9 +18,24 @@ import { FooterComponent } from './footer/footer.component';
 import { ContestsPageComponent } from './contests-page/contests-page.component';
 import { ContestCardComponent } from './contest-card/contest-card.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ResearchPapersComponent } from './_pages/research-papers/research-papers.component';
+import { ResearchPaperCardComponent } from './research-paper-card/research-paper-card.component';
+import { ContestLoadingCardComponent } from './contest-loading-card/contest-loading-card.component';
+import { SkeletonModule } from 'primeng/skeleton';
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, ImageCarouselComponent, FooterComponent, ContestsPageComponent, ContestCardComponent, HomePageComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    ImageCarouselComponent,
+    FooterComponent,
+    ContestsPageComponent,
+    ContestCardComponent,
+    HomePageComponent,
+    ResearchPapersComponent,
+    ResearchPaperCardComponent,
+    ContestLoadingCardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +47,10 @@ import { FormsModule } from '@angular/forms';
     DialogModule,
     InputTextModule,
     InputTextareaModule,
-    FormsModule
+    FormsModule,
+    CalendarModule,
+    ReactiveFormsModule,
+    SkeletonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

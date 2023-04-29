@@ -1,13 +1,19 @@
-
-  <div class="col mb-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{contest.name}}</h5>
-        <p class="card-text">
-          {{contest.description}}
-        </p>
-        <a href="{{contest.url}}" target="_blank">Register</a>
+<div class="col mb-4">
+  <div class="card border-bottom border-primary">
+    <div class="card-body">
+      <h5 class="card-title">{{ contest.name }}</h5>
+      <p class="card-text">
+        {{ contest.description }}
+      </p>
+      <div class="d-flex justify-content-between align-items-center">
+        <p-button
+          label="REGISTER"
+          styleClass="p-button-text"
+          (onClick)="showDetailEmitter()"
+        ></p-button>
+        <!-- <a href="{{ contest.url }}" target="_blank">Register</a> -->
+        <label> Free</label>
       </div>
     </div>
   </div>
-
+</div>

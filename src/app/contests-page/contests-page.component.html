@@ -1,24 +1,33 @@
 <div class="display-5 mb-4 mt-4 fw-lighter">
   Contests<p-button
-  label="Add Contest"
+    label="Add Contest"
     icon="pi pi-plus"
     class="ms-2"
     (click)="showDialog()"
   ></p-button>
 </div>
-<span class="p-input-icon-left">
+<span class="p-input-icon-left mb-4">
   <i class="pi pi-search"></i>
-  <input type="text" pInputText placeholder="Search" [(ngModel)]="query" (keypress)="onSearch()" />
+  <input
+    type="text"
+    pInputText
+    placeholder="Search contests"
+    [(ngModel)]="query"
+    (input)="onSearch($event)"
+  />
 </span>
-<div style="min-height: 70vh">
+<div style="min-height: 70vh" *ngIf="!isLoading">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
     <app-contest-card
+      (showDetailsClicked)="showContestDetails($event)"
       *ngFor="let contest of contests"
       [contest]="contest"
     ></app-contest-card>
   </div>
 </div>
+<app-contest-loading-card *ngIf="isLoading"></app-contest-loading-card>
 
+<!-- Create a new contest image -->
 <p-dialog
   header="Add Contest"
   [(visible)]="visible"
@@ -26,20 +35,73 @@
   [draggable]="false"
   [resizable]="false"
 >
-  <form action="" class="p-4">
-    <span class="p-float-label">
-      <input pInputText id="title" />
-      <label htmlFor="title">Title</label>
-    </span>
-    
-    <span class="p-float-label mt-4">
-      <textarea id="description" rows="5" cols="20" pInputTextarea></textarea>
-      <label for="description">Desciption</label>
-    </span>
-    <span class="p-float-label mt-4">
-      <input pInputText id="title" />
-      <label htmlFor="title">Title</label>
-    </span> 
-    <p-button label="Submit" styleClass="p-button mt-4" ></p-button>
+  <form action="" [formGroup]="addContestForm">
+    <div class="row">
+      <div
+        class="d-md-flex col-6 d-none justify-content-center align-items-center flex-column"
+      >
+        <img src="../../assets/contest.jpg" alt="" />
+      </div>
+      <div
+        class="col-md-6 d-flex flex-column align-items-center"
+        style="max-width: 450px"
+      >
+        <input
+          class="mt-1"
+          pInputText
+          id="title"
+          formControlName="title"
+          placeholder="Contest Title"
+        />
+
+        <p-calendar
+          styleClass="mt-2"
+          placeholder="Last Date"
+          formControlName="last_date"
+        ></p-calendar>
+
+        <textarea
+          class="mt-2"
+          id="description"
+          rows="5"
+          cols="34"
+          pInputTextarea
+          formControlName="description"
+          placeholder="Description"
+        ></textarea>
+        <input
+          placeholder="url"
+          pInputText
+          id="url"
+          formControlName="url"
+          class="mt-2"
+        />
+        <br />
+        <p-button label="Submit" styleClass="p-button mt-2"></p-button>
+      </div>
+    </div>
   </form>
+</p-dialog>
+
+<p-dialog
+  header="Register"
+  [(visible)]="isContestDetailDialogVisible"
+  [modal]="true"
+  [style]="{ width: '50vw', minWidth: '400px', height: '80vh' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSfqM13ancodW1mHmB5D_iIQS-3dGWQYKhlKnefvEbzsAxRlTw/viewform?embedded=true"
+    width="100%"
+    height="100%  "
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    >Loading…</iframe
+  >
+  <!-- <div
+    class="g-form"
+    data-formurl="https://docs.google.com/forms/d/14dw7m7fsU-kF2Mpvrm4gpxIFeAVGkrYzX-VSvcfig5E"
+  ></div> -->
 </p-dialog>

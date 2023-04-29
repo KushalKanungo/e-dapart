@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Contest } from '../_models/contest';
 
 @Component({
@@ -8,5 +8,11 @@ import { Contest } from '../_models/contest';
 })
 export class ContestCardComponent {
   @Input() contest!: Contest;
-  
+  @Output() showDetailsClicked: EventEmitter<number> = new EventEmitter();
+
+  showDetailEmitter() {
+    console.log('emitter');
+
+    this.showDetailsClicked.emit();
+  }
 }
