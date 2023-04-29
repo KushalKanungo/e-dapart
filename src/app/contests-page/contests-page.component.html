@@ -1,0 +1,45 @@
+<div class="display-5 mb-4 mt-4 fw-lighter">
+  Contests<p-button
+  label="Add Contest"
+    icon="pi pi-plus"
+    class="ms-2"
+    (click)="showDialog()"
+  ></p-button>
+</div>
+<span class="p-input-icon-left">
+  <i class="pi pi-search"></i>
+  <input type="text" pInputText placeholder="Search" [(ngModel)]="query" (keypress)="onSearch()" />
+</span>
+<div style="min-height: 70vh">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+    <app-contest-card
+      *ngFor="let contest of contests"
+      [contest]="contest"
+    ></app-contest-card>
+  </div>
+</div>
+
+<p-dialog
+  header="Add Contest"
+  [(visible)]="visible"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <form action="" class="p-4">
+    <span class="p-float-label">
+      <input pInputText id="title" />
+      <label htmlFor="title">Title</label>
+    </span>
+    
+    <span class="p-float-label mt-4">
+      <textarea id="description" rows="5" cols="20" pInputTextarea></textarea>
+      <label for="description">Desciption</label>
+    </span>
+    <span class="p-float-label mt-4">
+      <input pInputText id="title" />
+      <label htmlFor="title">Title</label>
+    </span> 
+    <p-button label="Submit" styleClass="p-button mt-4" ></p-button>
+  </form>
+</p-dialog>
