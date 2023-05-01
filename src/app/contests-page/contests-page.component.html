@@ -1,11 +1,13 @@
-<div class="display-5 mb-4 mt-4 fw-lighter">
-  Contests<p-button
-    label="Add Contest"
+<div class="display-2 mb-4 mt-4 fw-lighter">
+  Contests
+
+  <p-button
     icon="pi pi-plus"
-    class="ms-2"
+    styleClass="p-button"
     (click)="showDialog()"
   ></p-button>
 </div>
+
 <span class="p-input-icon-left mb-4">
   <i class="pi pi-search"></i>
   <input
@@ -27,9 +29,17 @@
 </div>
 <app-contest-loading-card *ngIf="isLoading"></app-contest-loading-card>
 
+<p-paginator
+  (onPageChange)="onPageChange($event)"
+  [first]="first"
+  [rows]="rows"
+  [totalRecords]="120"
+  [rowsPerPageOptions]="[10, 20, 30]"
+></p-paginator>
+
 <!-- Create a new contest image -->
 <p-dialog
-  header="Add Contest"
+  header="ADD CONTEST"
   [(visible)]="visible"
   [modal]="true"
   [draggable]="false"
@@ -40,7 +50,7 @@
       <div
         class="d-md-flex col-6 d-none justify-content-center align-items-center flex-column"
       >
-        <img src="../../assets/contest.jpg" alt="" />
+        <img src="../../assets/contest.png" alt="" />
       </div>
       <div
         class="col-md-6 d-flex flex-column align-items-center"
@@ -91,17 +101,10 @@
   [draggable]="false"
   [resizable]="false"
 >
-  <iframe
-    src="https://docs.google.com/forms/d/e/1FAIpQLSfqM13ancodW1mHmB5D_iIQS-3dGWQYKhlKnefvEbzsAxRlTw/viewform?embedded=true"
-    width="100%"
-    height="100%  "
-    frameborder="0"
-    marginheight="0"
-    marginwidth="0"
-    >Loading…</iframe
-  >
-  <!-- <div
-    class="g-form"
-    data-formurl="https://docs.google.com/forms/d/14dw7m7fsU-kF2Mpvrm4gpxIFeAVGkrYzX-VSvcfig5E"
-  ></div> -->
+  <app-google-embedder
+    [embeddedLink]="
+      'https://docs.google.com/forms/d/e/1FAIpQLSfqM13ancodW1mHmB5D_iIQS-3dGWQYKhlKnefvEbzsAxRlTw/viewform'
+    "
+    [embeddedType]="'form'"
+  ></app-google-embedder>
 </p-dialog>

@@ -1,1 +1,4 @@
-<p>research-papers works!</p>
+<app-research-paper-card
+  *ngFor="let item of researchPapers"
+  [researchPaperDetail]="item"
+></app-research-paper-card>

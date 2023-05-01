@@ -14,6 +14,13 @@ export class ContestsPageComponent {
   isContestDetailDialogVisible: boolean = false;
   query: string = '';
   isLoading: boolean = true;
+  first: number = 0;
+  rows: number = 10;
+
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+  }
 
   ngOnInit() {
     setTimeout(() => {

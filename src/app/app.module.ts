@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +10,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
+import { PaginatorModule } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -22,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResearchPapersComponent } from './_pages/research-papers/research-papers.component';
 import { ResearchPaperCardComponent } from './research-paper-card/research-paper-card.component';
 import { ContestLoadingCardComponent } from './contest-loading-card/contest-loading-card.component';
-import { SkeletonModule } from 'primeng/skeleton';
+import { GoogleEmbedderComponent } from './google-embedder/google-embedder.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,11 +39,13 @@ import { SkeletonModule } from 'primeng/skeleton';
     ResearchPapersComponent,
     ResearchPaperCardComponent,
     ContestLoadingCardComponent,
+    GoogleEmbedderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MenubarModule,
     ScrollPanelModule,
     CarouselModule,
@@ -51,6 +57,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     CalendarModule,
     ReactiveFormsModule,
     SkeletonModule,
+    PaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

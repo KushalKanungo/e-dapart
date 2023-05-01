@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ResearchPaper } from '../_models/research-paper';
+import { Observable } from 'rxjs';
+import { Filter } from '../_models/filter';
+import { environment } from 'src/environment/environment';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResearchPaperService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+  private BASE_URL = environment.baseUrl;
+
   researchPapers: ResearchPaper[] = [
     {
       id: 1,
@@ -16,6 +22,7 @@ export class ResearchPaperService {
       publish_year: 2022,
       students: ['John Smith', 'Jessica Lee'],
       mentors: ['Dr. Jane Doe'],
+      url: 'this.is.test.url',
     },
     {
       id: 2,
@@ -25,6 +32,7 @@ export class ResearchPaperService {
       publish_year: 2023,
       students: ['Sarah Kim', 'David Nguyen'],
       mentors: ['Dr. James Smith', 'Dr. Anna Chen'],
+      url: 'this.is.test.url',
     },
     {
       id: 3,
@@ -35,6 +43,7 @@ export class ResearchPaperService {
       publish_year: 2021,
       students: ['Emily Wilson', 'Michael Johnson'],
       mentors: ['Dr. Karen Lee'],
+      url: 'this.is.test.url',
     },
     {
       id: 4,
@@ -44,6 +53,7 @@ export class ResearchPaperService {
       publish_year: 2022,
       students: ['David Kim', 'Jennifer Nguyen'],
       mentors: ['Dr. James Lee', 'Dr. Anna Chen'],
+      url: 'this.is.test.url',
     },
     {
       id: 5,
@@ -54,6 +64,7 @@ export class ResearchPaperService {
       publish_year: 2023,
       students: ['Andrew Lee', 'Jessica Kim'],
       mentors: ['Dr. David Kim'],
+      url: 'this.is.test.url',
     },
     {
       id: 6,
@@ -64,6 +75,7 @@ export class ResearchPaperService {
       publish_year: 2021,
       students: ['Michael Johnson', 'Emily Wilson'],
       mentors: ['Dr. Karen Lee'],
+      url: 'this.is.test.url',
     },
     {
       id: 7,
@@ -74,6 +86,7 @@ export class ResearchPaperService {
       publish_year: 2022,
       students: ['Jessica Lee', 'John Smith'],
       mentors: ['Dr. Jane Doe'],
+      url: 'this.is.test.url',
     },
     {
       id: 8,
@@ -84,6 +97,11 @@ export class ResearchPaperService {
       publish_year: 2023,
       students: ['David Nguyen', 'Sarah Kim'],
       mentors: ['Dr. James Smith', 'Dr. Anna Chen'],
+      url: 'this.is.test.url',
     },
   ];
+
+  getResearchPapers(filter: Filter): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}`);
+  }
 }
