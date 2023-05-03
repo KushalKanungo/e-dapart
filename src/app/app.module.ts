@@ -12,6 +12,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,6 +27,9 @@ import { ResearchPapersComponent } from './_pages/research-papers/research-paper
 import { ResearchPaperCardComponent } from './research-paper-card/research-paper-card.component';
 import { ContestLoadingCardComponent } from './contest-loading-card/contest-loading-card.component';
 import { GoogleEmbedderComponent } from './google-embedder/google-embedder.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarComponent } from './calendar/calendar.component';
+import { TimetableFormComponent } from './timetable-form/timetable-form.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,8 @@ import { GoogleEmbedderComponent } from './google-embedder/google-embedder.compo
     ResearchPaperCardComponent,
     ContestLoadingCardComponent,
     GoogleEmbedderComponent,
+    CalendarComponent,
+    TimetableFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,8 +64,10 @@ import { GoogleEmbedderComponent } from './google-embedder/google-embedder.compo
     ReactiveFormsModule,
     SkeletonModule,
     PaginatorModule,
+    FullCalendarModule,
+    DynamicDialogModule,
   ],
-  providers: [],
+  providers: [DialogService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

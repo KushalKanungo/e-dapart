@@ -1,0 +1,37 @@
+img {
+  object-fit: contain;
+  max-width: 95%;
+  max-height: 95%;
+  width: auto;
+  height: auto;
+}
+
+input {
+  display: block;
+}
+
+::ng-deep .same-width {
+  width: 18rem !important;
+}
+
+::ng-deep .p-inputtext {
+  width: 18rem !important;
+}
+
+::ng-deep .p-datepicker table td {
+  padding: 0.2rem !important;
+}
+
+::ng-deep .p-datepicker table td > span {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+::ng-deep .p-datepicker table {
+  font-size: 10pt;
+  margin: -0.143rem 0;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header {
+  padding: 0.2rem;
+}

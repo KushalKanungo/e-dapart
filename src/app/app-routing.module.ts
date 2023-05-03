@@ -4,6 +4,8 @@ import { ContestsPageComponent } from './contests-page/contests-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ResearchPaperCardComponent } from './research-paper-card/research-paper-card.component';
 import { ResearchPapersComponent } from './_pages/research-papers/research-papers.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { TimetableFormComponent } from './timetable-form/timetable-form.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,14 @@ const routes: Routes = [
   {
     path: 'research-papers',
     component: ResearchPapersComponent,
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent,
+  },
+  {
+    path: 'timetable',
+    component: TimetableFormComponent,
   },
 ];
 
