@@ -26,9 +26,42 @@ export class CalendarComponent {
       { title: 'Event 1', date: '2023-05-01' },
       { title: 'Event 2', date: '2023-05-05', color: 'red' },
     ],
+    // views: {
+    //   timeGridFourDay: {
+    //     type: 'dayGrid',
+    //     duration: { days: 7 },
+    //   },
+    // },
+    // initialView: 'timeGridFourDay',
   };
 
-  handleDateClick(arg: any) {
+  items = [
+    {
+      icon: 'pi pi-pencil',
+      command: () => {},
+    },
+    {
+      icon: 'pi pi-refresh',
+      command: () => {},
+    },
+    {
+      icon: 'pi pi-trash',
+      command: () => {
+        this.handleDateClick();
+      },
+    },
+    {
+      icon: 'pi pi-upload',
+      routerLink: ['/fileupload'],
+    },
+    {
+      icon: 'pi pi-external-link',
+      target: '_blank',
+      url: 'http://angular.io',
+    },
+  ];
+
+  handleDateClick() {
     this.ref = this.dialogService.open(TimetableFormComponent, {
       header: 'Add TimeTable',
       width: '50vw',
@@ -37,14 +70,18 @@ export class CalendarComponent {
     this.ref.onClose.subscribe((data: EventAddArg) => {
       if (data) {
         //TODO Add this data to calendar
-        const calendarApi = this.calendarComponent.getApi();
-        calendarApi.addEvent(data);
-        console.log(data);
+        this.addEventToCalendar(data);
       }
     });
   }
 
   handleEventAdd(info: any) {
     console.log('Event added', info.event);
+  }
+
+  // This function is used to add event to the calendar locally
+  addEventToCalendar(data: EventAddArg) {
+    const calendarApi = this.calendarComponent.getApi();
+    calendarApi.addEvent(data);
   }
 }

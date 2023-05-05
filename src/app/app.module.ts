@@ -13,6 +13,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
+import { SpeedDialModule } from 'primeng/speeddial';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -66,6 +67,7 @@ import { TimetableFormComponent } from './timetable-form/timetable-form.componen
     PaginatorModule,
     FullCalendarModule,
     DynamicDialogModule,
+    SpeedDialModule,
   ],
   providers: [DialogService],
   bootstrap: [AppComponent],
