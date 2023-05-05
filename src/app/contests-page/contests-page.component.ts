@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Contest } from '../_models/contest';
 import { ContestsService } from '../contests.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
+import { ContestFormComponent } from '../contest-form/contest-form.component';
 
 @Component({
   selector: 'app-contests-page',
@@ -17,6 +19,8 @@ export class ContestsPageComponent {
   first: number = 0;
   rows: number = 10;
 
+  ref!: DynamicDialogRef;
+
   onPageChange(event: any) {
     this.first = event.first;
     this.rows = event.rows;
@@ -28,8 +32,19 @@ export class ContestsPageComponent {
     }, 2000);
   }
 
-  showDialog() {
-    this.visible = true;
+  openForm() {
+    this.ref = this.dialogService.open(ContestFormComponent, {
+      header: 'Add Contest',
+      width: '50vw',
+      style: { 'min-width': '380px', 'min-height': '460px' },
+    });
+    this.ref.onClose.subscribe((data: any) => {
+      if (data) {
+        console.log(data);
+        this.contests.push(data);
+        // TODO: API calling here
+      }
+    });
   }
 
   addContestForm: FormGroup = new FormGroup({
@@ -39,7 +54,10 @@ export class ContestsPageComponent {
     url: new FormControl('url', Validators.required),
   });
 
-  constructor(private contestService: ContestsService) {
+  constructor(
+    private contestService: ContestsService,
+    public dialogService: DialogService
+  ) {
     this.contests = this.contestService.allContests;
   }
 

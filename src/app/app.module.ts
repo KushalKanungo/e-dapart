@@ -14,6 +14,9 @@ import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { SpeedDialModule } from 'primeng/speeddial';
+import { ChipsModule } from 'primeng/chips';
+import { AvatarModule } from 'primeng/avatar';
+import { ChipModule } from 'primeng/chip';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -31,6 +34,8 @@ import { GoogleEmbedderComponent } from './google-embedder/google-embedder.compo
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarComponent } from './calendar/calendar.component';
 import { TimetableFormComponent } from './timetable-form/timetable-form.component';
+import { ReasearchPaperFormComponent } from './reasearch-paper-form/reasearch-paper-form.component';
+import { ContestFormComponent } from './contest-form/contest-form.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +52,8 @@ import { TimetableFormComponent } from './timetable-form/timetable-form.componen
     GoogleEmbedderComponent,
     CalendarComponent,
     TimetableFormComponent,
+    ReasearchPaperFormComponent,
+    ContestFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +75,9 @@ import { TimetableFormComponent } from './timetable-form/timetable-form.componen
     FullCalendarModule,
     DynamicDialogModule,
     SpeedDialModule,
+    ChipsModule,
+    ChipModule,
+    AvatarModule,
   ],
   providers: [DialogService],
   bootstrap: [AppComponent],

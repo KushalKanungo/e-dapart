@@ -2,9 +2,9 @@
   <div
     class="d-none d-xl-flex justify-content-center align-items-center col-xl-6"
   >
-    <img class="side-img" src="../../assets/exam.jpg" alt="" />
+    <img class="side-img" src="../../assets/research.jpg" alt="" />
   </div>
-  <div class="col-12 col-xl-6">
+  <div class="col-12 col-xl-6 d-flex align-items-center justify-content-center">
     <form
       class="d-flex flex-column align-items-center"
       action=""
@@ -19,16 +19,24 @@
         placeholder="Title"
       />
       <p-calendar
-        styleClass="mt-2  same-width"
-        placeholder="Date"
-        formControlName="start_date"
+        formControlName="published_year"
+        styleClass="mt-2"
+        view="year"
+        dateFormat="yy"
+        inputId="yearpicker"
+        placeholder="Published Year"
       ></p-calendar>
-      <p-dropdown
-        styleClass="mt-2 same-width"
-        formControlName="semester"
-        [options]="semesters"
-        placeholder="Select Semester"
-      ></p-dropdown>
+      <p-chips formControlName="students" class="mt-2" placeholder="Students">
+        <ng-template let-chip pTemplate="item">
+          <div class="my-chip">{{ chip }}</div>
+        </ng-template>
+      </p-chips>
+      <p-chips formControlName="mentors" class="mt-2" placeholder="Mentors">
+        <ng-template let-chip pTemplate="item">
+          <div class="my-chip">{{ chip }}</div>
+        </ng-template>
+      </p-chips>
+
       <textarea
         class="mt-2"
         id="description"
@@ -38,6 +46,7 @@
         formControlName="description"
         placeholder="Description"
       ></textarea>
+
       <input
         class="mt-2"
         pInputText
@@ -51,7 +60,6 @@
         styleClass="mt-2 same-width"
         label="Add"
         type="submit"
-        [disabled]="!addTimeTableForm.valid"
       ></p-button>
     </form>
   </div>

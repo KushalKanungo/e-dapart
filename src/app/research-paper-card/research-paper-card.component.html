@@ -1,1 +1,35 @@
-<p>research-paper-card works!</p>
+<div class="col mb-4">
+  <div class="card border-bottom border-primary">
+    <div class="card-body">
+      <h5 class="card-title text-truncate" title="{{ researchPaper.title }}">
+        {{ researchPaper.title }}
+      </h5>
+      <div class="small text-muted">{{ researchPaper.publish_year }}</div>
+      <p class="card-text mt-2">
+        {{ researchPaper.description }}
+      </p>
+      <div class="Authors">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <span>Authors :</span>
+          <p-chip
+            *ngFor="let student of researchPaper.students"
+            label="{{ student }}"
+          ></p-chip>
+        </div>
+      </div>
+      <div class="Mentors mt-4">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <span>Mentors :</span>
+          <p-chip
+            *ngFor="let mentor of researchPaper.mentors"
+            label="{{ mentor }}"
+          ></p-chip>
+        </div>
+      </div>
+      <div class="" dir="rtl">
+        <p-button label="Read More" styleClass="p-button-text"></p-button>
+        <!-- <a href="{{ contest.url }}" target="_blank">Register</a> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,28 @@
-<app-research-paper-card
-  *ngFor="let item of researchPapers"
-  [researchPaperDetail]="item"
-></app-research-paper-card>
+<div class="display-2 mb-4 mt-4 fw-lighter">
+  Research Papers
+
+  <p-button
+    icon="pi pi-plus"
+    styleClass="p-button"
+    (click)="openForm()"
+  ></p-button>
+</div>
+
+<span class="p-input-icon-left mb-4">
+  <i class="pi pi-search"></i>
+  <input
+    type="text"
+    pInputText
+    placeholder="Search contests"
+    [(ngModel)]="query"
+    (input)="onSearch($event)"
+  />
+</span>
+<div style="min-height: 70vh">
+  <div class="row row-cols-1 row-cols-md-2">
+    <app-research-paper-card
+      *ngFor="let item of researchPapers"
+      [researchPaper]="item"
+    ></app-research-paper-card>
+  </div>
+</div>

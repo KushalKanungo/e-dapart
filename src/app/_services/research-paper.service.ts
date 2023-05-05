@@ -16,55 +16,70 @@ export class ResearchPaperService {
     {
       id: 1,
       title:
-        'Design and Implementation of a Low-Power Voltage-Controlled Oscillator',
+        'An Innovative Approach to Energy Conservation using Voltage Regulation',
       description:
-        'This project involves the design and implementation of a low-power voltage-controlled oscillator (VCO) using MOSFET technology for wireless communication applications.',
+        'This paper presents a novel technique for energy conservation in electrical systems by regulating the voltage.',
       publish_year: 2022,
-      students: ['John Smith', 'Jessica Lee'],
-      mentors: ['Dr. Jane Doe'],
-      url: 'this.is.test.url',
+      url: 'https://www.example.com/paper1',
+      tags: ['energy conservation', 'voltage regulation', 'power systems'],
+      students: ['Amit Kumar', 'Sneha Singh'],
+      mentors: ['Dr. Ramesh Sharma', 'Dr. Priya Singh'],
     },
     {
       id: 2,
-      title: 'Development of an Intelligent Solar Tracking System',
+      title:
+        'Design and Implementation of an Efficient DC-DC Converter for Renewable Energy Sources',
       description:
-        "This project aims to develop an intelligent solar tracking system that uses sensors to track the sun's movement and adjust solar panel orientation for optimal energy generation.",
-      publish_year: 2023,
-      students: ['Sarah Kim', 'David Nguyen'],
-      mentors: ['Dr. James Smith', 'Dr. Anna Chen'],
-      url: 'this.is.test.url',
+        'This paper presents the design and implementation of an efficient DC-DC converter for renewable energy sources like solar panels and wind turbines.',
+      publish_year: 2021,
+      url: 'https://www.example.com/paper2',
+      tags: [
+        'DC-DC converter',
+        'renewable energy',
+        'solar panels',
+        'wind turbines',
+      ],
+      students: ['Anjali Mishra', 'Rajesh Kumar'],
+      mentors: ['Dr. Sanjay Sharma', 'Dr. Anil Gupta'],
     },
     {
       id: 3,
       title:
-        'Design and Implementation of a Low-Noise Amplifier for RF Applications',
+        'Real-time Monitoring and Control of Electrical Systems using Internet of Things',
       description:
-        'This project involves the design and implementation of a low-noise amplifier (LNA) for radio frequency (RF) applications using CMOS technology.',
-      publish_year: 2021,
-      students: ['Emily Wilson', 'Michael Johnson'],
-      mentors: ['Dr. Karen Lee'],
-      url: 'this.is.test.url',
+        'This paper presents a real-time monitoring and control system for electrical systems using Internet of Things (IoT) technology.',
+      publish_year: 2020,
+      url: 'https://www.example.com/paper3',
+      tags: [
+        'Internet of Things',
+        'monitoring and control',
+        'electrical systems',
+      ],
+      students: ['Prashant Singh', 'Ankita Srivastava'],
+      mentors: ['Dr. Anand Singh', 'Dr. Rajesh Verma'],
     },
     {
       id: 4,
-      title: 'Design and Implementation of a Wireless Power Transfer System',
+      title: 'Optimal Sizing of Battery Energy Storage Systems for Microgrids',
       description:
-        'This project involves the design and implementation of a wireless power transfer system that can transmit power wirelessly over a distance using resonant magnetic coupling.',
-      publish_year: 2022,
-      students: ['David Kim', 'Jennifer Nguyen'],
-      mentors: ['Dr. James Lee', 'Dr. Anna Chen'],
-      url: 'this.is.test.url',
+        'This paper presents a methodology for optimal sizing of battery energy storage systems in microgrids.',
+      publish_year: 2019,
+      url: 'https://www.example.com/paper4',
+      tags: ['battery energy storage', 'microgrids'],
+      students: ['Neha Gupta', 'Ankur Sharma'],
+      mentors: ['Dr. Rajesh Kumar', 'Dr. Manoj Kumar'],
     },
     {
       id: 5,
       title:
-        'Design and Implementation of a Digital Signal Processor for Audio Applications',
+        'Design and Analysis of a Three-phase Induction Motor for Electric Vehicles',
       description:
-        'This project involves the design and implementation of a digital signal processor (DSP) using Verilog for audio applications, such as digital audio effects and filters.',
-      publish_year: 2023,
-      students: ['Andrew Lee', 'Jessica Kim'],
-      mentors: ['Dr. David Kim'],
-      url: 'this.is.test.url',
+        'This paper presents the design and analysis of a three-phase induction motor for electric vehicles.',
+      publish_year: 2018,
+      url: 'https://www.example.com/paper5',
+      tags: ['three-phase induction motor', 'electric vehicles'],
+      students: ['Rahul Verma', 'Kavita Singh'],
+      mentors: ['Dr. Anuj Kumar', 'Dr. Sunita Verma'],
     },
     {
       id: 6,
@@ -103,5 +118,11 @@ export class ResearchPaperService {
 
   getResearchPapers(filter: Filter): Observable<any> {
     return this.http.get<any>(`${this.BASE_URL}`);
+  }
+
+  searchContests(query: string) {
+    return this.researchPapers.filter((research) =>
+      research.title.toLowerCase().includes(query.toLowerCase())
+    );
   }
 }

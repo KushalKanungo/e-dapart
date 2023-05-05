@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ResearchPaper } from '../_models/research-paper';
 
 @Component({
@@ -6,6 +6,17 @@ import { ResearchPaper } from '../_models/research-paper';
   templateUrl: './research-paper-card.component.html',
   styleUrls: ['./research-paper-card.component.scss'],
 })
-export class ResearchPaperCardComponent {
-  @Input() researchPaperDetail!: ResearchPaper;
+export class ResearchPaperCardComponent implements OnInit {
+  @Input() researchPaper!: ResearchPaper;
+  authorsList: string = '';
+  mentorsList: string = '';
+
+  ngOnInit() {
+    this.authorsList = this.nameParser(this.researchPaper.students);
+    this.mentorsList = this.nameParser(this.researchPaper.mentors);
+  }
+
+  nameParser(namesArray: string[]): string {
+    return namesArray.join(', ');
+  }
 }

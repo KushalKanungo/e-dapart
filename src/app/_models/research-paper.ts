@@ -4,6 +4,7 @@ export interface ResearchPaper {
   description: string;
   publish_year: number;
   url: string;
+  tags?: string[];
   students: string[];
   mentors: string[];
 }
