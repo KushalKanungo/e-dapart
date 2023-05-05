@@ -29,6 +29,7 @@ export class TimetableFormComponent {
     title: new FormControl('', Validators.required),
     semester: new FormControl('', Validators.required),
     start_date: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
     url: new FormControl('', Validators.required),
   });
 
@@ -40,6 +41,7 @@ export class TimetableFormComponent {
         .get('start_date')
         ?.value.toISOString()
         .slice(0, 10),
+      description: this.addTimeTableForm.get('description')?.value,
       url: this.addTimeTableForm.get('url')?.value,
       sem: this.addTimeTableForm.get('semester')?.value,
     };

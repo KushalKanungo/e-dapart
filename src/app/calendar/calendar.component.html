@@ -1,3 +1,11 @@
 <div class="mb-4 mt-4">
   <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
 </div>
+
+<p-speedDial
+  class="speeddial-right"
+  [transitionDelay]="80"
+  styleClass="speeddial-right"
+  [model]="items"
+  direction="up"
+></p-speedDial>

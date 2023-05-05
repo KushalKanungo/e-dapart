@@ -20,7 +20,7 @@
       />
       <p-calendar
         styleClass="mt-2  same-width"
-        placeholder="Last Date"
+        placeholder="Date"
         formControlName="start_date"
       ></p-calendar>
       <p-dropdown
@@ -29,12 +29,21 @@
         [options]="semesters"
         placeholder="Select Semester"
       ></p-dropdown>
+      <textarea
+        class="mt-2"
+        id="description"
+        rows="1"
+        cols="34"
+        pInputTextarea
+        formControlName="description"
+        placeholder="Description"
+      ></textarea>
       <input
         class="mt-2"
         pInputText
         id="title"
         formControlName="url"
-        placeholder="Time Table URL"
+        placeholder="URL"
       />
 
       <br />
