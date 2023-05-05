@@ -4,6 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TimetableFormComponent } from '../timetable-form/timetable-form.component';
+import { NoticeFormComponent } from '../notice-form/notice-form.component';
+import { ContestFormComponent } from '../contest-form/contest-form.component';
 
 @Component({
   selector: 'app-calendar',
@@ -37,27 +39,34 @@ export class CalendarComponent {
 
   items = [
     {
-      icon: 'pi pi-pencil',
-      command: () => {},
-    },
-    {
-      icon: 'pi pi-refresh',
-      command: () => {},
-    },
-    {
-      icon: 'pi pi-trash',
+      tooltipOptions: {
+        tooltipLabel: 'Add Notice',
+        tooltipPosition: 'left',
+      },
+      icon: 'pi pi-copy',
       command: () => {
-        this.handleDateClick();
+        this.openAddNoticeForm();
       },
     },
     {
-      icon: 'pi pi-upload',
-      routerLink: ['/fileupload'],
+      icon: 'pi pi-megaphone',
+      tooltipOptions: {
+        tooltipLabel: 'Add Contest',
+        tooltipPosition: 'left',
+      },
+      command: () => {
+        this.openContestForm();
+      },
     },
     {
-      icon: 'pi pi-external-link',
-      target: '_blank',
-      url: 'http://angular.io',
+      icon: 'pi pi-table',
+      tooltipOptions: {
+        tooltipLabel: 'Add TimeTable',
+        tooltipPosition: 'left',
+      },
+      command: () => {
+        this.handleDateClick();
+      },
     },
   ];
 
@@ -83,5 +92,35 @@ export class CalendarComponent {
   addEventToCalendar(data: EventAddArg) {
     const calendarApi = this.calendarComponent.getApi();
     calendarApi.addEvent(data);
+  }
+
+  openAddNoticeForm() {
+    this.ref = this.dialogService.open(NoticeFormComponent, {
+      header: 'Add Notice',
+      width: '50vw',
+      style: { 'min-width': '380px', 'min-height': '460px' },
+    });
+    this.ref.onClose.subscribe((data: any) => {
+      if (data) {
+        console.log(data);
+
+        // TODO: API calling here
+      }
+    });
+  }
+
+  openContestForm() {
+    this.ref = this.dialogService.open(ContestFormComponent, {
+      header: 'Add Contest',
+      width: '50vw',
+      style: { 'min-width': '380px', 'min-height': '460px' },
+    });
+    this.ref.onClose.subscribe((data: any) => {
+      if (data) {
+        console.log(data);
+        // this.contests.push(data);
+        // TODO: API calling here
+      }
+    });
   }
 }

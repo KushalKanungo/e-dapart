@@ -36,6 +36,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { TimetableFormComponent } from './timetable-form/timetable-form.component';
 import { ReasearchPaperFormComponent } from './reasearch-paper-form/reasearch-paper-form.component';
 import { ContestFormComponent } from './contest-form/contest-form.component';
+import { NoticeFormComponent } from './notice-form/notice-form.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ContestFormComponent } from './contest-form/contest-form.component';
     TimetableFormComponent,
     ReasearchPaperFormComponent,
     ContestFormComponent,
+    NoticeFormComponent,
   ],
   imports: [
     BrowserModule,
