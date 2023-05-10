@@ -1,12 +1,15 @@
-<div class="display-2 mb-4 mt-4 fw-lighter">
-  Contests
-
-  <p-button
+<p-button
     icon="pi pi-plus"
     styleClass="p-button"
+    class="floating"
     (click)="openForm()"
   ></p-button>
+<div class="display-2 mb-4 mt-4 fw-regular">
+  <i class="bi bi-trophy"></i>
+  Contests
+  
 </div>
+<hr>
 
 <span class="p-input-icon-left mb-4">
   <i class="pi pi-search"></i>
@@ -67,7 +70,7 @@
         <p-calendar
           styleClass="mt-2"
           placeholder="Last Date"
-          formControlName="last_date"
+          formControlName="date"
         ></p-calendar>
 
         <textarea

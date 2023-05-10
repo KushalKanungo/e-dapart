@@ -1,0 +1,32 @@
+<p>{{researchData.description}}</p>
+
+<p-chip label="{{researchData.publish_year}}" icon="pi pi-calendar" styleClass="mb-4 me-2" ></p-chip>
+
+<p-chip styleClass="download">
+  <a href="{{downloadGenerator(researchData.url)}}" target="_blank" class="p-chip-text">
+    <i class="pi pi-download"></i>
+    Search
+  </a>
+</p-chip>
+
+<div class="Authors">
+  <div class="d-flex align-items-center gap-2 flex-wrap">
+    <span>Authors :</span>
+    <p-chip
+      *ngFor="let student of researchData.students"
+      label="{{ student }}"
+    ></p-chip>
+  </div>
+</div>
+<div class="Mentors mt-4 mb-3">
+  <div class="d-flex align-items-center gap-2 flex-wrap">
+    <span>Mentors :</span>
+    <p-chip
+      *ngFor="let mentor of researchData.mentors"
+      label="{{ mentor }}"
+    ></p-chip>
+  </div>
+</div>
+
+
+<app-google-embedder [embeddedType]="'pdf'" [embeddedLink]="researchData.url"></app-google-embedder>

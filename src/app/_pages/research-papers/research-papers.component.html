@@ -1,11 +1,13 @@
-<div class="display-2 mb-4 mt-4 fw-lighter">
-  Research Papers
-
-  <p-button
+<p-button
     icon="pi pi-plus"
     styleClass="p-button"
+    class="floating"
     (click)="openForm()"
   ></p-button>
+<div class="display-2 mb-4 mt-4 fw-regular">
+  <i class="bi bi-file-earmark-ruled"></i>  Research Papers
+
+  <hr>
 </div>
 
 <span class="p-input-icon-left mb-4">
@@ -17,6 +19,7 @@
     [(ngModel)]="query"
     (input)="onSearch($event)"
   />
+  <p-calendar class="ms-2" [style]="{width: '8rem'}"  [(ngModel)]="year" view="year" dateFormat="yy" inputId="yearpicker" placeholder="Year"></p-calendar>
 </span>
 <div style="min-height: 70vh">
   <div class="row row-cols-1 row-cols-md-2">

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TimeTableService } from '../_services/time-table.service';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ContestsService } from '../contests.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-timetable-form',
@@ -11,7 +13,8 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 export class TimetableFormComponent {
   constructor(
     private timeTableService: TimeTableService,
-    public ref: DynamicDialogRef
+    public ref: DynamicDialogRef,
+    private eventService: ContestsService,
   ) {}
 
   semesters = [
@@ -28,23 +31,16 @@ export class TimetableFormComponent {
   addTimeTableForm: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
     semester: new FormControl('', Validators.required),
-    start_date: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     url: new FormControl('', Validators.required),
   });
 
   onSubmit() {
-    let requestBody = {
-      event_type: 'timetable',
-      title: this.addTimeTableForm.get('title')?.value,
-      date: this.addTimeTableForm
-        .get('start_date')
-        ?.value.toISOString()
-        .slice(0, 10),
-      description: this.addTimeTableForm.get('description')?.value,
-      url: this.addTimeTableForm.get('url')?.value,
-      sem: this.addTimeTableForm.get('semester')?.value,
-    };
+    let requestBody = this.addTimeTableForm.value
+    this.eventService.createTimeTable(requestBody).subscribe({next:(dat)=>{
+
+    }})
     this.ref.close(requestBody);
     // this.timeTableService
     //   .addTimeTable(requestBody)

@@ -19,6 +19,7 @@ export class NoticeFormComponent {
 
   onSubmit() {
     let requestBody = this.addTimeTableForm.value;
+    
     this.ref.close(requestBody);
     // this.timeTableService
     //   .addTimeTable(requestBody)

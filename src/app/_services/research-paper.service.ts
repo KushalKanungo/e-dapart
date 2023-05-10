@@ -20,7 +20,7 @@ export class ResearchPaperService {
       description:
         'This paper presents a novel technique for energy conservation in electrical systems by regulating the voltage.',
       publish_year: 2022,
-      url: 'https://www.example.com/paper1',
+      url: 'https://drive.google.com/file/d/1FdYYUA6pnixn1WwFZcxLdiku1KkgfgVL/view?usp=share_link',
       tags: ['energy conservation', 'voltage regulation', 'power systems'],
       students: ['Amit Kumar', 'Sneha Singh'],
       mentors: ['Dr. Ramesh Sharma', 'Dr. Priya Singh'],

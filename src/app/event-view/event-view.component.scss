@@ -1,0 +1,9 @@
+::ng-deep p-chip .download, .p-chip a{
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+}
+
+.download:hover{
+  color: white !important;
+}

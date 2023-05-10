@@ -26,9 +26,11 @@ export class GoogleEmbedderComponent {
       case 'pdf':
         this.embeddedLink = this.embeddedLink.substring(
           0,
-          this.embeddedLink.indexOf('view') + 4
+          this.embeddedLink.indexOf('view')
         );
         this.embeddedLink = this.embeddedLink + 'preview';
+        console.log(this.embeddedLink);
+        
         break;
     }
     this.sanitizedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(

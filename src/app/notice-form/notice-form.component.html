@@ -44,6 +44,7 @@
 
       <br />
       <p-button
+        [disabled]="!addTimeTableForm.valid"
         styleClass="mt-2 same-width"
         label="Add"
         type="submit"

@@ -14,7 +14,7 @@ export class ReasearchPaperFormComponent {
     public ref: DynamicDialogRef
   ) {}
 
-  addTimeTableForm: FormGroup = new FormGroup({
+  addResearchPapersForm: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
     students: new FormControl('', Validators.required),
     published_year: new FormControl('', Validators.required),
@@ -24,7 +24,7 @@ export class ReasearchPaperFormComponent {
   });
 
   onSubmit() {
-    let requestBody = this.addTimeTableForm.value;
+    let requestBody = this.addResearchPapersForm.value;
     this.ref.close(requestBody);
     // this.timeTableService
     //   .addTimeTable(requestBody)

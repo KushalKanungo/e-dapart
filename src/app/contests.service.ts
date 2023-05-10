@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Contest } from './_models/contest';
+import { Filter } from './_models/filter';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContestsService {
-  constructor() {}
+  private BASE_URL = environment.baseUrl;
+
+  constructor(private http:HttpClient) {}
   allContests: Contest[] = [
     {
       id: 1,
@@ -97,7 +103,24 @@ export class ContestsService {
 
   searchContests(query: string) {
     return this.allContests.filter((contest) =>
-      contest.name.toLowerCase().includes(query.toLowerCase())
+      contest.name.toLowerCase().includes(query.toLowerCase())  
     );
   }
+
+  createNotice(newNotice: any): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}notices`, newNotice);
+  }
+  
+  createContest(newContest: any): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}contests`, newContest);
+  }
+  
+  createTimeTable(newtimetable: any): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}timetables`, newtimetable);
+  }
+  
+  event_by_month(month:number, year: number): Observable<any>{
+    return this.http.post<any>(`${this.BASE_URL}events/by_month`, {filter: {month, year}});
+  }
+
 }

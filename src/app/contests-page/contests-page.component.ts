@@ -50,7 +50,7 @@ export class ContestsPageComponent {
   addContestForm: FormGroup = new FormGroup({
     title: new FormControl('title', Validators.required),
     description: new FormControl('', Validators.required),
-    last_date: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
     url: new FormControl('url', Validators.required),
   });
 

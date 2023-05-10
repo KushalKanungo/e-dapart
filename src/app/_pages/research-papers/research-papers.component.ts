@@ -13,6 +13,7 @@ export class ResearchPapersComponent {
   researchPapers: ResearchPaper[] = [];
   ref!: DynamicDialogRef;
   query: string = '';
+  year!: number;
 
   constructor(
     private researchPaperService: ResearchPaperService,

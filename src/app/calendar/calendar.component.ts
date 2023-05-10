@@ -6,6 +6,9 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TimetableFormComponent } from '../timetable-form/timetable-form.component';
 import { NoticeFormComponent } from '../notice-form/notice-form.component';
 import { ContestFormComponent } from '../contest-form/contest-form.component';
+import { ContestsService } from '../contests.service';
+import { EventViewComponent } from '../event-view/event-view.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-calendar',
@@ -15,26 +18,27 @@ import { ContestFormComponent } from '../contest-form/contest-form.component';
 export class CalendarComponent {
   @ViewChild('fullcalendar') calendarComponent: any;
   ref!: DynamicDialogRef;
-  constructor(public dialogService: DialogService) {}
+  constructor(public dialogService: DialogService, public eventService: ContestsService, 
+    private messageService: MessageService
+    ) {}
 
   calendarOptions: CalendarOptions = {
     // aspectRatio: 1,
     // height: 400,
+    
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
-    eventClick: this.handleDateClick.bind(this), // MUST ensure `this` context is maintained
-    eventAdd: this.handleEventAdd.bind(this),
+    eventClick: this.handleDateClick.bind(this)  , // MUST ensure `this` context is maintained
     events: [
       { title: 'Event 1', date: '2023-05-01' },
       { title: 'Event 2', date: '2023-05-05', color: 'red' },
     ],
-    // views: {
-    //   timeGridFourDay: {
-    //     type: 'dayGrid',
-    //     duration: { days: 7 },
-    //   },
-    // },
-    // initialView: 'timeGridFourDay',
+    datesSet: (dateset)=> {
+      // Check if the view has changed to a different month
+
+      // console.log(dateset.view.currentStart.getMonth());
+      this.fetchEvents()
+    }
   };
 
   items = [
@@ -65,16 +69,20 @@ export class CalendarComponent {
         tooltipPosition: 'left',
       },
       command: () => {
-        this.handleDateClick();
+        this.openTimeTableForm();
       },
     },
   ];
 
-  handleDateClick() {
-    this.ref = this.dialogService.open(TimetableFormComponent, {
-      header: 'Add TimeTable',
+
+  handleDateClick(info:any) {
+    console.log(info.event.extendedProps.description);
+    
+    this.ref = this.dialogService.open(EventViewComponent, {
+      header: info.event.title,
       width: '50vw',
-      style: { 'min-width': '380px', 'min-height': '460px' },
+      style: { 'min-width': '380px', 'min-height': '95vh' },
+      data: {eventType: info.event.event_type, eventData: info.event}
     });
     this.ref.onClose.subscribe((data: EventAddArg) => {
       if (data) {
@@ -83,9 +91,19 @@ export class CalendarComponent {
       }
     });
   }
-
-  handleEventAdd(info: any) {
-    console.log('Event added', info.event);
+  openTimeTableForm() {
+    
+    this.ref = this.dialogService.open(TimetableFormComponent, {
+      header: 'Add TimeTable',
+      width: '50vw',
+      style: { 'min-width': '380px', 'min-height': '460px' },
+    });
+    this.ref.onClose.subscribe((data: EventAddArg) => {
+      if (data) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'New Time Table Added' });
+        this.fetchEvents()
+      }
+    });
   }
 
   // This function is used to add event to the calendar locally
@@ -102,9 +120,13 @@ export class CalendarComponent {
     });
     this.ref.onClose.subscribe((data: any) => {
       if (data) {
-        console.log(data);
+        this.eventService.createNotice(data).subscribe((data)=>{
+          if(data){
 
-        // TODO: API calling here
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'New Notice Added' });
+            this.fetchEvents()
+          }
+        })
       }
     });
   }
@@ -116,11 +138,22 @@ export class CalendarComponent {
       style: { 'min-width': '380px', 'min-height': '460px' },
     });
     this.ref.onClose.subscribe((data: any) => {
-      if (data) {
-        console.log(data);
-        // this.contests.push(data);
-        // TODO: API calling here
+      if(data){
+
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'New Contest Added' });
+        this.fetchEvents()
       }
     });
+  }
+
+  fetchEvents(){
+    const calendarApi = this.calendarComponent.getApi();
+    let month = calendarApi.currentData.currentDate.getMonth();
+    let year = calendarApi.currentData.currentDate.getFullYear();
+    calendarApi.removeAllEvents();
+    this.eventService.event_by_month(month+1,year).subscribe((events: any[])=>{
+      
+      events.forEach((eve)=>{this.addEventToCalendar(eve)})
+    })
   }
 }

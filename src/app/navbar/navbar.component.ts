@@ -20,7 +20,7 @@ export class NavbarComponent {
       label: 'Academics',
       icon: 'pi pi-fw pi-users',
       items: [
-        { label: 'Academic Calendar' },
+        { label: 'Academic Calendar', routerLink: 'calendar' },
         {
           label: 'Time Table',
           items: [
@@ -40,15 +40,15 @@ export class NavbarComponent {
     },
 
     {
-      label: 'Faculty & Staff',
+      label: 'Contests',
       icon: 'pi pi-fw pi-user-plus',
-      items: [{ label: 'Employee Directory' }, { label: 'Careers' }],
+      routerLink: 'contests'
     },
     {
       label: 'Research',
       icon: 'pi pi-fw pi-book',
       items: [
-        { label: 'Pubication & Patents' },
+        { label: 'Research Papers', routerLink: 'research-papers' },
         { label: 'Sponsored' },
         { label: 'Workshops' },
         { label: 'Seminars' },

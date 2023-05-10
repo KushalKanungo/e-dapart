@@ -17,6 +17,7 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { ChipsModule } from 'primeng/chips';
 import { AvatarModule } from 'primeng/avatar';
 import { ChipModule } from 'primeng/chip';
+import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -37,6 +38,9 @@ import { TimetableFormComponent } from './timetable-form/timetable-form.componen
 import { ReasearchPaperFormComponent } from './reasearch-paper-form/reasearch-paper-form.component';
 import { ContestFormComponent } from './contest-form/contest-form.component';
 import { NoticeFormComponent } from './notice-form/notice-form.component';
+import { MessageService } from 'primeng/api';
+import { EventViewComponent } from './event-view/event-view.component';
+import { ResearchViewComponent } from './research-view/research-view.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +60,8 @@ import { NoticeFormComponent } from './notice-form/notice-form.component';
     ReasearchPaperFormComponent,
     ContestFormComponent,
     NoticeFormComponent,
+    EventViewComponent,
+    ResearchViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,8 +86,9 @@ import { NoticeFormComponent } from './notice-form/notice-form.component';
     ChipsModule,
     ChipModule,
     AvatarModule,
+    ToastModule
   ],
-  providers: [DialogService],
+  providers: [DialogService, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
