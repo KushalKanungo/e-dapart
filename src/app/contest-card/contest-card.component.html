@@ -1,19 +1,35 @@
 <div class="col mb-4">
-  <div class="card border-bottom border-primary">
+  <div
+    class="card border-bottom"
+    [ngClass]="{
+      'top-success': contest.status == 'live',
+      'top-danger': contest.status == 'expired'
+    }"
+  >
     <div class="card-body">
-      <h5 class="card-title text-truncate" title="{{ contest.name }}">
-        {{ contest.name }}
+      <h5 class="card-title text-truncate" title="{{ contest.title }}">
+        {{ contest.title }}
       </h5>
-      <div class="small text-muted">{{ contest.dateCreated | date }}</div>
-      <p class="card-text mt-2">
+      <div>
+        <span class="small text-muted">{{ contest.date | date }}</span>
+        <p-badge
+          *ngIf="contest.status == 'expired' || contest.status == 'live'"
+          value="{{ contest.status | uppercase }}"
+          styleClass="ms-2"
+          [severity]="contest.status == 'expired' ? 'danger' : 'success'"
+        ></p-badge>
+      </div>
+      <p class="card-text mt-2 two-lines-only">
         {{ contest.description }}
       </p>
       <div class="" dir="rtl">
         <p-button
-          label="REGISTER"
+          [label]="contest.status == 'expired' ? 'VIEW' : 'REGISTER'"
           styleClass="p-button-text"
+          size
           (onClick)="showDetailEmitter()"
         ></p-button>
+
         <!-- <a href="{{ contest.url }}" target="_blank">Register</a> -->
       </div>
     </div>

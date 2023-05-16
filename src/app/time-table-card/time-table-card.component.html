@@ -1,0 +1,27 @@
+<div class="col mb-4">
+  <div class="card border-bottom border-primary">
+    <div class="card-body">
+      <h5 class="card-title text-truncate" title="{{ timeTable.title }}">
+        {{ timeTable.title }}
+      </h5>
+      <div class="small text-muted">
+        {{ timeTable.date | date }}
+        <p-chip
+          [styleClass]="'ms-4'"
+          [label]="timeTable.semester + ' Sem'"
+        ></p-chip>
+      </div>
+      <p class="card-text mt-2">
+        {{ timeTable.description }}
+      </p>
+      <div class="" dir="rtl">
+        <p-button
+          label="Read More"
+          styleClass="p-button-text"
+          (onClick)="showDetail()"
+        ></p-button>
+        <!-- <a href="{{ timeTable.url }}" target="_blank">Register</a> -->
+      </div>
+    </div>
+  </div>
+</div>

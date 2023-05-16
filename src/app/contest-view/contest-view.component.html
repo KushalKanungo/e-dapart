@@ -1,0 +1,11 @@
+<p>{{ contest.description }}</p>
+
+<p-chip
+  label="{{ contest.date | date }}"
+  icon="pi pi-calendar"
+  styleClass="mb-4 me-2"
+></p-chip>
+<app-google-embedder
+  [embeddedLink]="contest.url"
+  [embeddedType]="'form'"
+></app-google-embedder>

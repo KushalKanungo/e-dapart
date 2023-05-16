@@ -1,0 +1,51 @@
+<p-button
+  icon="pi pi-plus"
+  styleClass="p-button"
+  class="floating"
+  (click)="openForm()"
+></p-button>
+<div class="display-2 mb-4 mt-4 fw-regular">
+  <i class="bi bi-trophy"></i>
+  TimeTables
+</div>
+<hr />
+
+<span class="p-input-icon-left mb-4">
+  <i class="pi pi-search"></i>
+  <input
+    type="text"
+    pInputText
+    placeholder="Search contests"
+    [(ngModel)]="query"
+    (keydown.enter)="fetchTimeTables()"
+  />
+</span>
+
+<p-multiSelect
+  styleClass="ms-2"
+  [options]="semesters"
+  [(ngModel)]="selectedSemesters"
+  defaultLabel="Semester    "
+  optionLabel="label"
+></p-multiSelect>
+<div
+  class="display-2 mt-5 text-center text-muted"
+  *ngIf="timeTables && timeTables.length < 1"
+>
+  No Time Table Found
+</div>
+<div style="min-height: 70vh" *ngIf="!isLoading">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+    <app-time-table-card
+      *ngFor="let timeTable of timeTables"
+      [timeTable]="timeTable"
+    ></app-time-table-card>
+  </div>
+</div>
+<app-contest-loading-card *ngIf="isLoading"></app-contest-loading-card>
+
+<p-paginator
+  (onPageChange)="onPageChange($event)"
+  [rows]="rows"
+  [totalRecords]="total_count"
+></p-paginator>

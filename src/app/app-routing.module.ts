@@ -6,6 +6,7 @@ import { ResearchPaperCardComponent } from './research-paper-card/research-paper
 import { ResearchPapersComponent } from './_pages/research-papers/research-papers.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { TimetableFormComponent } from './timetable-form/timetable-form.component';
+import { TimeTablePageComponent } from './time-table-page/time-table-page.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'timetable',
-    component: TimetableFormComponent,
+    component: TimeTablePageComponent,
   },
 ];
 

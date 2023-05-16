@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { environment } from 'src/environment/environment';
+// import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +9,9 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
+  constructor() {}
+  clientId = environment.clientId;
+
   items: MenuItem[] = [
     {
       label: 'Institute',
@@ -42,7 +47,7 @@ export class NavbarComponent {
     {
       label: 'Contests',
       icon: 'pi pi-fw pi-user-plus',
-      routerLink: 'contests'
+      routerLink: 'contests',
     },
     {
       label: 'Research',
@@ -55,4 +60,31 @@ export class NavbarComponent {
       ],
     },
   ];
+
+  ngOnInit() {
+    // @ts-ignore
+    window.onGoogleLibraryLoad = () => {
+      // @ts-ignore
+      google.accounts.id.initialize({
+        client_id: this.clientId,
+        callback: this.handleCredentialResponse.bind(this),
+        auto_select: false,
+        cancel_on_tap_outside: true,
+      });
+      // @ts-ignore
+      google.accounts.id.renderButton(
+        // @ts-ignore
+        document.getElementById('buttonDiv'),
+        { theme: 'outline', size: 'large', width: '100%' }
+      );
+      // @ts-ignore
+      google.accounts.id.prompt((notification: PromptMomentNotification) => {});
+    };
+  }
+
+  login() {}
+
+  handleCredentialResponse(response: any) {
+    console.log(response.credential);
+  }
 }

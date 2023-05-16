@@ -30,11 +30,13 @@ export class GoogleEmbedderComponent {
         );
         this.embeddedLink = this.embeddedLink + 'preview';
         console.log(this.embeddedLink);
-        
+
         break;
     }
+
     this.sanitizedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
       this.embeddedLink
     );
+    console.log(this.sanitizedUrl);
   }
 }

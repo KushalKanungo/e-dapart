@@ -1,15 +1,14 @@
 <p-button
-    icon="pi pi-plus"
-    styleClass="p-button"
-    class="floating"
-    (click)="openForm()"
-  ></p-button>
+  icon="pi pi-plus"
+  styleClass="p-button"
+  class="floating"
+  (click)="openForm()"
+></p-button>
 <div class="display-2 mb-4 mt-4 fw-regular">
   <i class="bi bi-trophy"></i>
-  Contests
-  
+  Activities
 </div>
-<hr>
+<hr />
 
 <span class="p-input-icon-left mb-4">
   <i class="pi pi-search"></i>
@@ -18,9 +17,15 @@
     pInputText
     placeholder="Search contests"
     [(ngModel)]="query"
-    (input)="onSearch($event)"
+    (keydown.enter)="fetchContests()"
   />
 </span>
+<div
+  class="display-2 mt-5 text-center text-muted"
+  *ngIf="contests && contests.length < 1"
+>
+  No Contest Found
+</div>
 <div style="min-height: 70vh" *ngIf="!isLoading">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
     <app-contest-card
@@ -34,10 +39,8 @@
 
 <p-paginator
   (onPageChange)="onPageChange($event)"
-  [first]="first"
   [rows]="rows"
-  [totalRecords]="120"
-  [rowsPerPageOptions]="[10, 20, 30]"
+  [totalRecords]="total_count"
 ></p-paginator>
 
 <!-- Create a new contest image -->
@@ -97,17 +100,22 @@
 </p-dialog>
 
 <p-dialog
-  header="Register"
+  [header]="contest?.title"
   [(visible)]="isContestDetailDialogVisible"
   [modal]="true"
   [style]="{ width: '50vw', minWidth: '400px', height: '80vh' }"
   [draggable]="false"
   [resizable]="false"
 >
+  <p>{{ contest?.description }}</p>
+
+  <p-chip
+    label="{{ contest?.date | date }}"
+    icon="pi pi-calendar"
+    styleClass="mb-4 me-2"
+  ></p-chip>
   <app-google-embedder
-    [embeddedLink]="
-      'https://docs.google.com/forms/d/e/1FAIpQLSfqM13ancodW1mHmB5D_iIQS-3dGWQYKhlKnefvEbzsAxRlTw/viewform'
-    "
+    [embeddedLink]="url || ''"
     [embeddedType]="'form'"
   ></app-google-embedder>
 </p-dialog>

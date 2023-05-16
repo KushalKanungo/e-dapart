@@ -1,4 +1,7 @@
-<p-menubar [model]="items">
+<p-menubar
+  [model]="items"
+  [style]="{ position: 'sticky', top: '0px', 'z-index': '1001' }"
+>
   <ng-template pTemplate="start">
     <img
       src="../../assets/logo.jpeg"
@@ -6,5 +9,8 @@
       class="p-mr-2"
       alt="brand logo"
     />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div id="buttonDiv"></div>
   </ng-template>
 </p-menubar>

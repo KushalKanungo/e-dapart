@@ -18,6 +18,9 @@ import { ChipsModule } from 'primeng/chips';
 import { AvatarModule } from 'primeng/avatar';
 import { ChipModule } from 'primeng/chip';
 import { ToastModule } from 'primeng/toast';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { BadgeModule } from 'primeng/badge';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -41,6 +44,9 @@ import { NoticeFormComponent } from './notice-form/notice-form.component';
 import { MessageService } from 'primeng/api';
 import { EventViewComponent } from './event-view/event-view.component';
 import { ResearchViewComponent } from './research-view/research-view.component';
+import { ContestViewComponent } from './contest-view/contest-view.component';
+import { TimeTableCardComponent } from './time-table-card/time-table-card.component';
+import { TimeTablePageComponent } from './time-table-page/time-table-page.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +68,9 @@ import { ResearchViewComponent } from './research-view/research-view.component';
     NoticeFormComponent,
     EventViewComponent,
     ResearchViewComponent,
+    ContestViewComponent,
+    TimeTableCardComponent,
+    TimeTablePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +95,10 @@ import { ResearchViewComponent } from './research-view/research-view.component';
     ChipsModule,
     ChipModule,
     AvatarModule,
-    ToastModule
+    ToastModule,
+    OverlayPanelModule,
+    MultiSelectModule,
+    BadgeModule,
   ],
   providers: [DialogService, MessageService],
   bootstrap: [AppComponent],

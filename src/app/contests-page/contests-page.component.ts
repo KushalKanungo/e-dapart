@@ -4,6 +4,8 @@ import { ContestsService } from '../contests.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { ContestFormComponent } from '../contest-form/contest-form.component';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ContestViewComponent } from '../contest-view/contest-view.component';
 
 @Component({
   selector: 'app-contests-page',
@@ -12,24 +14,43 @@ import { ContestFormComponent } from '../contest-form/contest-form.component';
 })
 export class ContestsPageComponent {
   contests: Contest[] = [];
+  contest!: any;
   visible: boolean = false;
   isContestDetailDialogVisible: boolean = false;
+
+  url!: string;
   query: string = '';
-  isLoading: boolean = true;
-  first: number = 0;
+  isLoading: boolean = false;
+  page: number = 0;
   rows: number = 10;
+  total_count: number = 0;
 
   ref!: DynamicDialogRef;
 
   onPageChange(event: any) {
-    this.first = event.first;
-    this.rows = event.rows;
+    this.page = event.page;
+    console.log(event);
+
+    this.fetchContests();
+  }
+
+  fetchContests() {
+    this.isLoading = true;
+    this.contestService.getContests(this.page + 1, this.query).subscribe({
+      next: (res: { contests: Contest[]; total_count: number }) => {
+        this.contests = res.contests;
+
+        this.total_count = res.total_count;
+        this.isLoading = false;
+      },
+    });
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
+    // setTimeout(() => {
+    //   this.isLoading = false;
+    // }, 2000);
+    this.fetchContests();
   }
 
   openForm() {
@@ -56,21 +77,23 @@ export class ContestsPageComponent {
 
   constructor(
     private contestService: ContestsService,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    private sanitizer: DomSanitizer
   ) {
     this.contests = this.contestService.allContests;
   }
 
   showContestDetails(id: number) {
-    this.isContestDetailDialogVisible = !this.isContestDetailDialogVisible;
-  }
-
-  onSearch($event: any) {
-    this.query = $event.target.value;
-
-    this.contests = this.contestService.searchContests(this.query);
-    if (this.query === '') {
-      this.contests = this.contestService.allContests;
-    }
+    this.contest = this.contests.find((cont) => cont.id === id);
+    this.ref = this.dialogService.open(ContestViewComponent, {
+      header: this.contest.title,
+      width: '50vw',
+      style: { 'min-width': '380px', 'min-height': '95vh' },
+      data: { contest: this.contest },
+    });
+    this.ref.onClose.subscribe((data: any) => {
+      if (data) {
+      }
+    });
   }
 }

@@ -5,7 +5,7 @@
   font-family: "Montserrat", sans-serif;
 }
 
-.floating button{
+.floating button {
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -17,4 +17,25 @@
   position: fixed !important;
   bottom: 10vh;
   right: 12vh;
+}
+
+.fc-daygrid-event-harness:hover {
+  cursor: pointer;
+  filter: brightness(80%);
+}
+
+.two-lines-only {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-success {
+  border-top: solid 2px #22c55e !important;
+}
+
+.top-danger {
+  border-top: solid 2px #ef4444 !important;
 }

@@ -1,13 +1,23 @@
-<p>{{desc}}</p>
+<p>{{ desc }}</p>
 
-<p-chip label="{{eventData.start | date}}" icon="pi pi-calendar" styleClass="mb-4 me-2" ></p-chip>
-<p-chip [label]="sem + ' Semester'" styleClass="mb-4 me-2"  *ngIf="eventType == 'timetable'"></p-chip>
+<p-chip
+  label="{{ eventData.start | date }}"
+  icon="pi pi-calendar"
+  styleClass="mb-4 me-2"
+></p-chip>
+<p-chip
+  [label]="sem + ' Semester'"
+  styleClass="mb-4 me-2"
+  *ngIf="eventType == 'timetable'"
+></p-chip>
 <p-chip styleClass="download">
-  <a href="{{downloadGenerator(url)}}" target="_blank" class="p-chip-text">
+  <a href="{{ downloadGenerator(url) }}" target="_blank" class="p-chip-text">
     <i class="pi pi-download"></i>
-    Search
+    Download
   </a>
 </p-chip>
 
-
-<app-google-embedder [embeddedType]="'pdf'" [embeddedLink]="url"></app-google-embedder>
+<app-google-embedder
+  [embeddedType]="eventType !== 'contest' ? 'pdf' : 'form'"
+  [embeddedLink]="url"
+></app-google-embedder>

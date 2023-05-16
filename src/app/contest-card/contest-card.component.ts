@@ -11,8 +11,6 @@ export class ContestCardComponent {
   @Output() showDetailsClicked: EventEmitter<number> = new EventEmitter();
 
   showDetailEmitter() {
-    console.log('emitter');
-
-    this.showDetailsClicked.emit();
+    this.showDetailsClicked.emit(this.contest.id);
   }
 }
