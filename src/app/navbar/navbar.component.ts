@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
+import { MenuItem, MessageService } from 'primeng/api';
 import { environment } from 'src/environment/environment';
+import { AuthServiceService } from '../_services/auth-service.service';
 // import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 
 @Component({
@@ -9,12 +11,17 @@ import { environment } from 'src/environment/environment';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor() {}
+  constructor(
+    private router: Router,
+    private authService: AuthServiceService,
+    private messageService: MessageService
+  ) {}
   clientId = environment.clientId;
-
+  isLoggedIn = false;
   items: MenuItem[] = [
     {
       label: 'Institute',
+      routerLink: 'home',
       icon: 'pi pi-fw pi-building',
       items: [
         { label: 'Rules & Regulations' },
@@ -28,15 +35,72 @@ export class NavbarComponent {
         { label: 'Academic Calendar', routerLink: 'calendar' },
         {
           label: 'Time Table',
+          routerLink: 'timetables',
           items: [
-            { label: 'Semester 1' },
-            { label: 'Semester 2' },
-            { label: 'Semester 3' },
-            { label: 'Semester 4' },
-            { label: 'Semester 5' },
-            { label: 'Semester 6' },
-            { label: 'Semester 7' },
-            { label: 'Semester 8' },
+            {
+              label: 'Semester 1',
+              command: () => {
+                this.router.navigate(['timetables'], {
+                  state: { semester: 1 },
+                });
+              },
+            },
+            {
+              label: 'Semester 2',
+              command: () => {
+                this.router.navigate(['timetables'], {
+                  state: { semester: 2 },
+                });
+              },
+            },
+            {
+              label: 'Semester 3',
+              command: () => {
+                this.router.navigate(['timetables'], {
+                  state: { semester: 3 },
+                });
+              },
+            },
+            {
+              label: 'Semester 4',
+              command: () => {
+                this.router.navigate(['timetables'], {
+                  state: { semester: 4 },
+                });
+              },
+            },
+            {
+              label: 'Semester 5',
+              command: () => {
+                this.router.navigate(['timetables'], {
+                  state: { semester: 5 },
+                });
+              },
+            },
+            {
+              label: 'Semester 6',
+              command: () => {
+                this.router.navigate(['timetables'], {
+                  state: { semester: 6 },
+                });
+              },
+            },
+            {
+              label: 'Semester 7',
+              command: () => {
+                this.router.navigate(['timetables'], {
+                  state: { semester: 7 },
+                });
+              },
+            },
+            {
+              label: 'Semester 8',
+              command: () => {
+                this.router.navigate(['timetables'], {
+                  state: { semester: 8 },
+                });
+              },
+            },
           ],
         },
         { label: 'Subject Notes' },
@@ -63,6 +127,7 @@ export class NavbarComponent {
 
   ngOnInit() {
     // @ts-ignore
+
     window.onGoogleLibraryLoad = () => {
       // @ts-ignore
       google.accounts.id.initialize({
@@ -74,17 +139,43 @@ export class NavbarComponent {
       // @ts-ignore
       google.accounts.id.renderButton(
         // @ts-ignore
+
         document.getElementById('buttonDiv'),
         { theme: 'outline', size: 'large', width: '100%' }
       );
       // @ts-ignore
       google.accounts.id.prompt((notification: PromptMomentNotification) => {});
     };
+
+    if (this.authService.isUserAdmin()) {
+      this.isLoggedIn = true;
+    }
   }
 
-  login() {}
+  logout() {
+    localStorage.removeItem('isAdmin');
+    this.router.navigate([''], { replaceUrl: true });
+  }
 
   handleCredentialResponse(response: any) {
     console.log(response.credential);
+    this.authService.login(response).subscribe({
+      next: (data) => {
+        this.authService.setAdmin();
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Logged IN',
+          detail: 'You are logged in successfully ',
+        });
+        this.isLoggedIn = true;
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'danger',
+          summary: 'UnAuthorized',
+          detail: 'You are not an admin',
+        });
+      },
+    });
   }
 }

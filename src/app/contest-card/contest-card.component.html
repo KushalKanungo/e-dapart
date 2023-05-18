@@ -3,7 +3,8 @@
     class="card border-bottom"
     [ngClass]="{
       'top-success': contest.status == 'live',
-      'top-danger': contest.status == 'expired'
+      'top-danger': contest.status == 'expired',
+      'top-primary': contest.status == 'upcoming'
     }"
   >
     <div class="card-body">
@@ -12,24 +13,36 @@
       </h5>
       <div>
         <span class="small text-muted">{{ contest.date | date }}</span>
-        <p-badge
+        <p-tag
           *ngIf="contest.status == 'expired' || contest.status == 'live'"
           value="{{ contest.status | uppercase }}"
           styleClass="ms-2"
           [severity]="contest.status == 'expired' ? 'danger' : 'success'"
-        ></p-badge>
+        ></p-tag>
       </div>
       <p class="card-text mt-2 two-lines-only">
         {{ contest.description }}
       </p>
       <div class="" dir="rtl">
         <p-button
+          class="register-button"
           [label]="contest.status == 'expired' ? 'VIEW' : 'REGISTER'"
           styleClass="p-button-text"
           size
           (onClick)="showDetailEmitter()"
         ></p-button>
-
+        <div class="actions">
+          <p-button
+            icon="pi pi-pencil"
+            styleClass="p-button-rounded p-button-success p-button-text p-button-sm "
+          ></p-button>
+        </div>
+        <div class="delete-button">
+          <p-button
+            icon="pi pi-times"
+            styleClass="p-button-rounded p-button-danger p-button-text p-button-sm"
+          ></p-button>
+        </div>
         <!-- <a href="{{ contest.url }}" target="_blank">Register</a> -->
       </div>
     </div>

@@ -9,6 +9,7 @@ import { ContestsService } from '../contests.service';
 import { TimeTableService } from '../_services/time-table.service';
 import { TimetableFormComponent } from '../timetable-form/timetable-form.component';
 import { TimeTable } from '../_models/timetable';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-time-table-page',
@@ -17,7 +18,7 @@ import { TimeTable } from '../_models/timetable';
 })
 export class TimeTablePageComponent {
   timeTables!: TimeTable[];
-  selectedSemesters = [];
+  selectedSemesters: number[] = [];
   timeTable!: any;
   visible: boolean = false;
   isContestDetailDialogVisible: boolean = false;
@@ -63,15 +64,14 @@ export class TimeTablePageComponent {
   }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.isLoading = false;
-    // }, 2000);
     this.fetchTimeTables();
   }
-
+  ngAfterViewInit() {
+    this.selectedSemesters = this.selectedSemesters;
+  }
   openForm() {
     this.ref = this.dialogService.open(TimetableFormComponent, {
-      header: 'Add Contest',
+      header: 'Add TimeTable',
       width: '50vw',
       style: { 'min-width': '380px', 'min-height': '460px' },
     });
@@ -83,10 +83,18 @@ export class TimeTablePageComponent {
   }
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private timeTableService: TimeTableService,
-    public dialogService: DialogService,
-    private sanitizer: DomSanitizer
-  ) {}
+    public dialogService: DialogService
+  ) {
+    const state = this.router.getCurrentNavigation()?.extras?.state;
+
+    if (state) {
+      // console.log(state['semester']);
+      this.selectedSemesters = [state['semester']];
+    }
+  }
 
   showContestDetails(id: number) {
     this.timeTable = this.timeTables.find((timetable) => timetable.id === id);

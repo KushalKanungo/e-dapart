@@ -13,6 +13,7 @@
 <span class="p-input-icon-left mb-4">
   <i class="pi pi-search"></i>
   <input
+    class="search"
     type="text"
     pInputText
     placeholder="Search contests"
@@ -25,12 +26,13 @@
   styleClass="ms-2"
   [options]="semesters"
   [(ngModel)]="selectedSemesters"
-  defaultLabel="Semester    "
+  defaultLabel="Semester"
   optionLabel="label"
+  optionValue="value"
 ></p-multiSelect>
 <div
   class="display-2 mt-5 text-center text-muted"
-  *ngIf="timeTables && timeTables.length < 1"
+  *ngIf="timeTables && timeTables.length < 1 && !isLoading"
 >
   No Time Table Found
 </div>

@@ -21,6 +21,7 @@ import { ToastModule } from 'primeng/toast';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { BadgeModule } from 'primeng/badge';
+import { TagModule } from 'primeng/tag';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -47,6 +48,7 @@ import { ResearchViewComponent } from './research-view/research-view.component';
 import { ContestViewComponent } from './contest-view/contest-view.component';
 import { TimeTableCardComponent } from './time-table-card/time-table-card.component';
 import { TimeTablePageComponent } from './time-table-page/time-table-page.component';
+import { ResearchLoadingCardComponent } from './research-loading-card/research-loading-card.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,7 @@ import { TimeTablePageComponent } from './time-table-page/time-table-page.compon
     ContestViewComponent,
     TimeTableCardComponent,
     TimeTablePageComponent,
+    ResearchLoadingCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +102,7 @@ import { TimeTablePageComponent } from './time-table-page/time-table-page.compon
     OverlayPanelModule,
     MultiSelectModule,
     BadgeModule,
+    TagModule,
   ],
   providers: [DialogService, MessageService],
   bootstrap: [AppComponent],

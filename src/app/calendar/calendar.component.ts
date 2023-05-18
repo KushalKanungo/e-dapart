@@ -9,6 +9,7 @@ import { ContestFormComponent } from '../contest-form/contest-form.component';
 import { ContestsService } from '../contests.service';
 import { EventViewComponent } from '../event-view/event-view.component';
 import { MessageService } from 'primeng/api';
+import { AuthServiceService } from '../_services/auth-service.service';
 
 @Component({
   selector: 'app-calendar',
@@ -18,11 +19,17 @@ import { MessageService } from 'primeng/api';
 export class CalendarComponent {
   @ViewChild('fullcalendar') calendarComponent: any;
   ref!: DynamicDialogRef;
+  isLoggedIn = false;
   constructor(
     public dialogService: DialogService,
     public eventService: ContestsService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthServiceService
   ) {}
+
+  ngOnInit() {
+    this.isLoggedIn = this.authService.isUserAdmin();
+  }
 
   calendarOptions: CalendarOptions = {
     // aspectRatio: 1,
@@ -81,6 +88,7 @@ export class CalendarComponent {
     this.ref = this.dialogService.open(EventViewComponent, {
       header: info.event.title,
       width: '50vw',
+      maximizable: true,
       style: { 'min-width': '380px', 'min-height': '95vh' },
       data: { eventType: info.event.event_type, eventData: info.event },
     });
@@ -119,6 +127,7 @@ export class CalendarComponent {
     this.ref = this.dialogService.open(NoticeFormComponent, {
       header: 'Add Notice',
       width: '50vw',
+      maximizable: true,
       style: { 'min-width': '380px', 'min-height': '460px' },
     });
     this.ref.onClose.subscribe((data: any) => {

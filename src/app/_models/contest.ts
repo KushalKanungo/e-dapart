@@ -4,7 +4,7 @@ export interface Contest {
   description: string;
   url: string;
   image_url?: string;
-  status: 'live' | 'expired';
+  status: 'live' | 'expired' | 'upcoming';
   date: Date;
   updated_at?: Date;
   created_at?: Date;

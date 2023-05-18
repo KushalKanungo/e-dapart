@@ -1,29 +1,48 @@
 <p-button
-    icon="pi pi-plus"
-    styleClass="p-button"
-    class="floating"
-    (click)="openForm()"
-  ></p-button>
+  *ngIf="isLoggedIn"
+  icon="pi pi-plus"
+  styleClass="p-button"
+  class="floating"
+  (click)="openForm()"
+></p-button>
 <div class="display-2 mb-4 mt-4 fw-regular">
-  <i class="bi bi-file-earmark-ruled"></i>  Research Papers
+  <i class="bi bi-file-earmark-ruled"></i> Research Papers
 
-  <hr>
+  <hr />
 </div>
 
 <span class="p-input-icon-left mb-4">
-  <i class="pi pi-search"></i>
-  <input
-    type="text"
-    pInputText
-    placeholder="Search contests"
-    [(ngModel)]="query"
-    (input)="onSearch($event)"
-  />
-  <p-calendar class="ms-2" [style]="{width: '8rem'}"  [(ngModel)]="year" view="year" dateFormat="yy" inputId="yearpicker" placeholder="Year"></p-calendar>
+  <div class="search-container">
+    <input
+      class="search"
+      pInputText
+      [(ngModel)]="query"
+      placeholder="Search"
+      (keydown.enter)="onSearch(query)"
+    />
+
+    <p-calendar
+      class="ms-2 me-2"
+      [style]="{ width: '8rem' }"
+      [(ngModel)]="year"
+      view="year"
+      dateFormat="yy"
+      inputId="yearpicker"
+      placeholder="Year"
+    ></p-calendar>
+    <button
+      pButton
+      type="button"
+      icon="pi pi-search"
+      (click)="onSearch(query)"
+    ></button>
+  </div>
 </span>
-<div style="min-height: 70vh">
+<app-research-loading-card *ngIf="isLoading"></app-research-loading-card>
+<div style="min-height: 70vh" *ngIf="!isLoading">
   <div class="row row-cols-1 row-cols-md-2">
     <app-research-paper-card
+      (passSelectedName)="searchSelectedName($event)"
       *ngFor="let item of researchPapers"
       [researchPaper]="item"
     ></app-research-paper-card>

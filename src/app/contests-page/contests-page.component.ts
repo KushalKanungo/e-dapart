@@ -6,6 +6,7 @@ import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { ContestFormComponent } from '../contest-form/contest-form.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ContestViewComponent } from '../contest-view/contest-view.component';
+import { AuthServiceService } from '../_services/auth-service.service';
 
 @Component({
   selector: 'app-contests-page',
@@ -24,6 +25,7 @@ export class ContestsPageComponent {
   page: number = 0;
   rows: number = 10;
   total_count: number = 0;
+  isLoggedIn = false;
 
   ref!: DynamicDialogRef;
 
@@ -51,6 +53,7 @@ export class ContestsPageComponent {
     //   this.isLoading = false;
     // }, 2000);
     this.fetchContests();
+    this.isLoggedIn = this.authService.isUserAdmin();
   }
 
   openForm() {
@@ -78,6 +81,7 @@ export class ContestsPageComponent {
   constructor(
     private contestService: ContestsService,
     public dialogService: DialogService,
+    private authService: AuthServiceService,
     private sanitizer: DomSanitizer
   ) {
     this.contests = this.contestService.allContests;

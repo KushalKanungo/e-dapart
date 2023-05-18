@@ -1,9 +1,36 @@
 .card {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border: none;
+  border-top-right-radius: 0.6rem;
+  border-top-left-radius: 0.6rem;
   transition: all 0.5s ease-out;
+  min-height: 13rem;
+  position: relative;
+  .register-button {
+    position: absolute;
+    bottom: 0.4rem;
+  }
+  .actions {
+    position: absolute;
+    bottom: 0.4rem;
+    left: 1rem;
+    display: none;
+  }
+  .delete-button {
+    position: absolute;
+    top: 0.4rem;
+    right: 1rem;
+    display: none;
+  }
 }
+
 .card:hover {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 2;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
   border: none;
+  .actions,
+  .delete-button {
+    display: inherit;
+  }
 }

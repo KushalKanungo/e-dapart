@@ -13,7 +13,9 @@
           <span>Authors :</span>
           <p-chip
             *ngFor="let student of researchPaper.students"
+            (click)="chipClickHandeler(student)"
             label="{{ student }}"
+            styleClass="hover-effect"
           ></p-chip>
         </div>
       </div>
@@ -22,12 +24,17 @@
           <span>Mentors :</span>
           <p-chip
             *ngFor="let mentor of researchPaper.mentors"
+            (click)="chipClickHandeler(mentor)"
             label="{{ mentor }}"
           ></p-chip>
         </div>
       </div>
       <div class="" dir="rtl">
-        <p-button label="Read More" styleClass="p-button-text" (onClick)="showPaper()" ></p-button>
+        <p-button
+          label="Read More"
+          styleClass="p-button-text"
+          (onClick)="showPaper()"
+        ></p-button>
         <!-- <a href="{{ contest.url }}" target="_blank">Register</a> -->
       </div>
     </div>

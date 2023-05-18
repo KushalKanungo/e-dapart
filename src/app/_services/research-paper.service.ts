@@ -55,8 +55,8 @@ export class ResearchPaperService {
         'monitoring and control',
         'electrical systems',
       ],
-      students: ['Prashant Singh', 'Ankita Srivastava'],
-      mentors: ['Dr. Anand Singh', 'Dr. Rajesh Verma'],
+      students: ['Prashant Singh', 'Amit Kumar'],
+      mentors: ['Dr. Priya Singh', 'Dr. Rajesh Verma'],
     },
     {
       id: 4,
@@ -67,7 +67,7 @@ export class ResearchPaperService {
       url: 'https://www.example.com/paper4',
       tags: ['battery energy storage', 'microgrids'],
       students: ['Neha Gupta', 'Ankur Sharma'],
-      mentors: ['Dr. Rajesh Kumar', 'Dr. Manoj Kumar'],
+      mentors: ['Dr. Rajesh Kumar', 'Dr. Priya Singh'],
     },
     {
       id: 5,
@@ -88,7 +88,7 @@ export class ResearchPaperService {
       description:
         'This project involves the design and implementation of a field-programmable gate array (FPGA)-based image processing system that can perform real-time image filtering and enhancement.',
       publish_year: 2021,
-      students: ['Michael Johnson', 'Emily Wilson'],
+      students: ['Amit Kumar', 'Emily Wilson'],
       mentors: ['Dr. Karen Lee'],
       url: 'this.is.test.url',
     },
@@ -121,8 +121,11 @@ export class ResearchPaperService {
   }
 
   searchContests(query: string) {
-    return this.researchPapers.filter((research) =>
-      research.title.toLowerCase().includes(query.toLowerCase())
+    return this.researchPapers.filter(
+      (research) =>
+        research.title.toLowerCase().includes(query.toLowerCase()) ||
+        research.mentors.includes(query) ||
+        research.students.includes(query)
     );
   }
 }

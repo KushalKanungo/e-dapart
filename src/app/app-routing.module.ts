@@ -10,7 +10,7 @@ import { TimeTablePageComponent } from './time-table-page/time-table-page.compon
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomePageComponent,
   },
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
     component: CalendarComponent,
   },
   {
-    path: 'timetable',
+    path: 'timetables',
     component: TimeTablePageComponent,
   },
 ];

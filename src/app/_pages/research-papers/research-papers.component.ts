@@ -3,6 +3,7 @@ import { ResearchPaper } from 'src/app/_models/research-paper';
 import { ResearchPaperService } from 'src/app/_services/research-paper.service';
 import { ReasearchPaperFormComponent } from 'src/app/reasearch-paper-form/reasearch-paper-form.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AuthServiceService } from 'src/app/_services/auth-service.service';
 
 @Component({
   selector: 'app-research-papers',
@@ -14,14 +15,21 @@ export class ResearchPapersComponent {
   ref!: DynamicDialogRef;
   query: string = '';
   year!: number;
+  isLoading = true;
+  isLoggedIn = false;
 
   constructor(
     private researchPaperService: ResearchPaperService,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    private authService: AuthServiceService
   ) {
-    this.researchPapers = researchPaperService.researchPapers;
+    this.onSearch(null);
+    // this.researchPapers = researchPaperService.researchPapers;
   }
 
+  ngOnInit() {
+    this.isLoggedIn = this.authService.isUserAdmin();
+  }
   openForm() {
     this.ref = this.dialogService.open(ReasearchPaperFormComponent, {
       header: 'Add Research Paper',
@@ -38,11 +46,21 @@ export class ResearchPapersComponent {
   }
 
   onSearch($event: any) {
-    this.query = $event.target.value;
+    this.query = $event || this.query;
+    this.isLoading = true;
+    setTimeout(() => {
+      this.researchPapers = this.researchPaperService.searchContests(
+        this.query
+      );
+      if (this.query === '') {
+        this.researchPapers = this.researchPaperService.researchPapers;
+      }
+      this.isLoading = false;
+    }, 1500);
+  }
 
-    this.researchPapers = this.researchPaperService.searchContests(this.query);
-    if (this.query === '') {
-      this.researchPapers = this.researchPaperService.researchPapers;
-    }
+  searchSelectedName(selectedName: string) {
+    this.query = selectedName;
+    this.onSearch(null);
   }
 }
