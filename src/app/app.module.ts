@@ -22,6 +22,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { BadgeModule } from 'primeng/badge';
 import { TagModule } from 'primeng/tag';
+import { CardModule } from 'primeng/card';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -103,6 +104,7 @@ import { ResearchLoadingCardComponent } from './research-loading-card/research-l
     MultiSelectModule,
     BadgeModule,
     TagModule,
+    CardModule,
   ],
   providers: [DialogService, MessageService],
   bootstrap: [AppComponent],

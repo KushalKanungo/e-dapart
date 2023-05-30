@@ -38,6 +38,13 @@ export class ContestsService {
     return this.http.post<any>(`${this.BASE_URL}contests`, newContest);
   }
 
+  editContest(updatedContest: any, contestId: number): Observable<any> {
+    return this.http.put<any>(
+      `${this.BASE_URL}contests/${contestId}`,
+      updatedContest
+    );
+  }
+
   createTimeTable(newtimetable: any): Observable<any> {
     return this.http.post<any>(`${this.BASE_URL}timetables`, newtimetable);
   }

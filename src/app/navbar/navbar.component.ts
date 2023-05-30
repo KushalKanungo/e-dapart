@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { environment } from 'src/environment/environment';
 import { AuthServiceService } from '../_services/auth-service.service';
+import { Location } from '@angular/common';
 // import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 
 @Component({
@@ -14,7 +15,8 @@ export class NavbarComponent {
   constructor(
     private router: Router,
     private authService: AuthServiceService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private location: Location
   ) {}
   clientId = environment.clientId;
   isLoggedIn = false;
@@ -126,39 +128,42 @@ export class NavbarComponent {
   ];
 
   ngOnInit() {
-    // @ts-ignore
-
-    window.onGoogleLibraryLoad = () => {
-      // @ts-ignore
-      google.accounts.id.initialize({
-        client_id: this.clientId,
-        callback: this.handleCredentialResponse.bind(this),
-        auto_select: false,
-        cancel_on_tap_outside: true,
-      });
-      // @ts-ignore
-      google.accounts.id.renderButton(
-        // @ts-ignore
-
-        document.getElementById('buttonDiv'),
-        { theme: 'outline', size: 'large', width: '100%' }
-      );
-      // @ts-ignore
-      google.accounts.id.prompt((notification: PromptMomentNotification) => {});
-    };
-
-    if (this.authService.isUserAdmin()) {
+    if (this.authService.isAuthorized()) {
       this.isLoggedIn = true;
+      return;
     }
+    // @ts-ignore
+    window.onGoogleLibraryLoad = () => {
+      this.startGoogleLogin();
+    };
   }
 
   logout() {
-    localStorage.removeItem('isAdmin');
-    this.router.navigate([''], { replaceUrl: true });
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.router.navigate(['home'], { replaceUrl: true });
+    this.startGoogleLogin();
+  }
+
+  startGoogleLogin() {
+    // @ts-ignore
+    google.accounts.id.initialize({
+      client_id: this.clientId,
+      callback: this.handleCredentialResponse.bind(this),
+      auto_select: false,
+      cancel_on_tap_outside: true,
+    });
+    // @ts-ignore
+    google.accounts.id.renderButton(
+      // @ts-ignore
+      document.getElementById('buttonDiv'),
+      { theme: 'filled', size: 'large', width: '100%', shape: 'pill' }
+    );
+    // @ts-ignore
+    google.accounts.id.prompt((notification: PromptMomentNotification) => {});
   }
 
   handleCredentialResponse(response: any) {
-    console.log(response.credential);
     this.authService.login(response).subscribe({
       next: (data) => {
         this.authService.setAdmin();
@@ -173,7 +178,7 @@ export class NavbarComponent {
         this.messageService.add({
           severity: 'danger',
           summary: 'UnAuthorized',
-          detail: 'You are not an admin',
+          detail: err,
         });
       },
     });

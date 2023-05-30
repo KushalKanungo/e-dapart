@@ -40,7 +40,7 @@
   border-top: solid 2px #ef4444 !important;
 }
 .top-primary {
-  border-top: solid 2px #3b82f6 !important;
+  border-top: solid 2px #14b8a6 !important;
 }
 
 .p-inputtext {
@@ -51,7 +51,7 @@
 
 .p-inputtext:focus,
 .p-inputtext:active {
-  border-bottom: solid 2px #3b82f6 !important;
+  border-bottom: solid 2px #14b8a6 !important;
   outline: none !important;
   box-shadow: none !important;
 }
@@ -68,7 +68,7 @@ body .search:focus,
 .search:active {
   width: 30rem !important;
   border-bottom: none !important;
-  border-left: solid 4px #3b82f6 !important;
+  border-left: solid 4px #14b8a6 !important;
 }
 
 p-chip:hover {
@@ -86,7 +86,7 @@ p-chip:hover {
   left: 0;
   width: 0;
   height: 100%;
-  background-color: #3b82f6; /* Set your desired background color */
+  background-color: #14b8a6; /* Set your desired background color */
   transition: width 0.2s ease-out;
 }
 
@@ -99,4 +99,8 @@ p-chip:hover {
     color: white !important;
     z-index: 2 !important;
   }
+}
+
+.pointer {
+  cursor: pointer;
 }

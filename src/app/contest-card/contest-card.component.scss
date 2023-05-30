@@ -12,16 +12,25 @@
   }
   .actions {
     position: absolute;
-    bottom: 0.4rem;
-    left: 1rem;
-    display: none;
+    bottom: 1.2rem;
+    right: 0.8rem;
+    .edit,
+    .delete {
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 100%;
+      transition: background-color 0.4s ease-out;
+    }
   }
-  .delete-button {
-    position: absolute;
-    top: 0.4rem;
-    right: 1rem;
-    display: none;
-  }
+}
+
+.edit:hover {
+  background-color: #14b8a6;
+  color: white;
+}
+.delete:hover {
+  background-color: #ef4444;
+  color: white;
 }
 
 .card:hover {

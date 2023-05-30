@@ -23,7 +23,7 @@
       <p class="card-text mt-2 two-lines-only">
         {{ contest.description }}
       </p>
-      <div class="" dir="rtl">
+      <div class="">
         <p-button
           class="register-button"
           [label]="contest.status == 'expired' ? 'VIEW' : 'REGISTER'"
@@ -31,18 +31,14 @@
           size
           (onClick)="showDetailEmitter()"
         ></p-button>
-        <div class="actions">
-          <p-button
-            icon="pi pi-pencil"
-            styleClass="p-button-rounded p-button-success p-button-text p-button-sm "
-          ></p-button>
-        </div>
-        <div class="delete-button">
-          <p-button
-            icon="pi pi-times"
-            styleClass="p-button-rounded p-button-danger p-button-text p-button-sm"
-          ></p-button>
-        </div>
+        <span class="actions" *ngIf="isAdmin">
+          <span class="edit">
+            <i class="bi bi-pencil" (click)="openEditForm()"></i>
+          </span>
+          <span class="delete mx-2">
+            <i class="bi bi-trash pointer"></i>
+          </span>
+        </span>
         <!-- <a href="{{ contest.url }}" target="_blank">Register</a> -->
       </div>
     </div>
